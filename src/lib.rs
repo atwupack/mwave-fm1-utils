@@ -1,13 +1,13 @@
 pub mod fx;
 
+use crate::fx::Effect;
 use midir::{MidiOutput, MidiOutputConnection};
 use std::error::Error;
 use std::thread::sleep;
 use std::time::Duration;
 use wmidi::Channel::{Ch1, Ch2};
 use wmidi::MidiMessage::{ControlChange, NoteOff, NoteOn, ProgramChange};
-use wmidi::{ControlFunction, MidiMessage, Note, ProgramNumber, U7, Velocity};
-use crate::fx::Effect;
+use wmidi::{MidiMessage, Note, ProgramNumber, U7, Velocity};
 
 pub struct FM1Player {
     fm1_out_conn: MidiOutputConnection,
