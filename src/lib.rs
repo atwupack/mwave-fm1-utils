@@ -1,6 +1,6 @@
 pub mod fx;
 
-use crate::fx::Effect;
+use crate::fx::{Effect, EffectParameter};
 use midir::{MidiOutput, MidiOutputConnection};
 use std::error::Error;
 use std::thread::sleep;
@@ -60,6 +60,15 @@ impl FM1Player {
             Ch2,
             effect.0,
             U7::from_u8_lossy(0),
+        ))?;
+        Ok(())
+    }
+
+    pub fn set_effect_parameter(&mut self, parameter: impl EffectParameter) -> Result<(), Box<dyn Error>> {
+        self.send_message(ControlChange(
+            Ch2,
+            parameter.control_function(),
+            parameter.control_value(),
         ))?;
         Ok(())
     }
